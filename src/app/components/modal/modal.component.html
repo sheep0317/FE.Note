@@ -1,0 +1,41 @@
+<!--Canvas show the note-->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+        <div class="user-grid">
+            <div class="image-of-user">
+                <img class="avatar" src='{{imageUrl}}'>
+            </div>
+            <div class="user-information">
+                <div class="nickname">
+                    Display Name
+                </div>
+                <div class="logout-btn">
+                    <button class="btn">
+                        Logout
+                    </button>
+                </div>
+            </div>
+            <div class="email">
+                tranvietmar15@gmail.com
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas-body">
+        <div class="present-note">
+            <p class="my-note">My Note</p>
+            <div *ngFor="let note of notes">
+              <button 
+                class="note-btn deactive" 
+                [style.background-color]=note.color
+                routerLink="/note/{{note.id}}">
+                  {{note.text}}
+              </button>
+            </div>
+        </div>
+        <div class="add-note">
+            <button  routerLink="/note/add" routerLinkActive="active">
+                Thêm ghi chú mới
+            </button>
+        </div>
+    </div>
+  </div>

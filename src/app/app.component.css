@@ -1,0 +1,36 @@
+
+.btn-text{
+    writing-mode: vertical-rl;
+    color: #fff;
+    padding: 0;
+    margin: 0;
+    font-weight: 600;
+}
+.btn{
+    background-color: black;
+    border-radius: 0%;
+    border: none;
+    padding: 0;
+    margin: 0;
+    z-index: 1;
+}
+.open-canvas{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 20px;
+}
+.nav-note{
+    display: none;
+}
+
+@media screen and (max-width: 500px) {
+    .open-canvas{
+        display: none;
+    }
+    .nav-note{
+        display: block;
+    }
+}
+    
