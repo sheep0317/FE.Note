@@ -1,1 +1,43 @@
-<p>note-content works!</p>
+
+<div class="wrap">
+    <div class="note-title">
+        <h1 class="title">
+            {{ noteContent.title }}
+        </h1>
+    </div>
+    <div class="note-image">
+        <div *ngFor= "let imageNote of noteContent.imageNotes">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#imageModal" id="{{imageNote.id}}" (click)="getElementId(imageNote.id)">
+                {{imageNote.id}}
+            </button>
+        </div>
+    </div>
+    <div class="note-content">
+        <div class="note-content__text">
+            <p>
+                {{ noteContent.text }}
+            </p>
+            <p>id: {{noteId}}</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered">
+      <div class="modal-content">
+       
+        <div class="modal-body">
+          <app-image-note [imageNote]="imageNoteContent(clickedId)"></app-image-note>
+        </div>
+        <div class="modal-footer">
+            <button data-bs-dismiss="modal" >
+                Đóng
+            </button>
+            <button (click)="deleteImage()">
+                Xóa
+            </button>
+        </div>
+      </div>
+    </div>
+  </div>
