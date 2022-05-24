@@ -8,8 +8,11 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ImageNoteComponent implements OnInit {
 
   @Input() imageNote: any;
+
+  
   constructor() { }
   ngOnInit(): void {
+   
   }
 
 }

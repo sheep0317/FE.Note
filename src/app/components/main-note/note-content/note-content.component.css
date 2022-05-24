@@ -1,0 +1,76 @@
+.wrap{
+    width: 100%;
+    height: 100vh;
+    padding: 10px 30px;
+    overflow-x: scroll;
+    background-color: #FFF7AA;
+
+}
+.wrap::-webkit-scrollbar {
+    display: none;
+}
+.textarea {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    resize: both;
+    min-height: 40px;
+    line-height: 20px;
+    padding: 5px;
+}
+.textarea[contenteditable]:empty::before {
+  content: "Placeholder still possible";
+  color: gray;
+}
+.note-title{
+    font-size: 18pt;
+    font-weight: bold;
+    margin: 10px 10px 10px 0px;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.note-image{
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    align-items: center;
+    
+}
+.current-image{
+    display: flex;
+    flex-direction: row;
+    overflow: scroll;
+    scroll-behavior: smooth;
+}
+
+.current-image::-webkit-scrollbar {
+  display: none;
+}
+.image-tag{
+  display: block;
+  overflow: hidden;
+  width: 200px;
+  height: 200px;
+  background-color: whitesmoke;
+  margin: 5px;
+  padding: 1px;
+}
+.image-tag h3{
+  display: inline-block;
+  overflow: hidden;
+  font-size: 12pt;
+  height: 12pt;
+}
+.header{
+  display: grid;
+  grid-template-columns: 4fr 1fr 4fr;
+
+}
+input.note-title{
+  width: 100%;
+}
+#noteContent{
+  font-size: 13pt;
+}

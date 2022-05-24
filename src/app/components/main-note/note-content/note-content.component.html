@@ -1,26 +1,54 @@
 
 <div class="wrap">
-    <div class="note-title">
-        <h1 class="title">
-            {{ noteContent.title }}
-        </h1>
+    <div class="header">
+        <div class="note-title">
+            <span id="noteTitle" class="textarea" role="textbox" contenteditable [style.color]=noteContent.color>
+                {{ noteContent.title }}
+            </span>   
+        </div>
+        <div class="color-pick">
+            <label for="ColorInput" class="form-label">Title Color</label><span>
+                <input type="color" class="form-control form-control-color" id="ColorInput" [value]="noteContent.color" title="Choose your color">
+            </span>
+        </div> 
+        <div class="function">
+            <button (click)="saveNote()">
+                save
+            </button>
+            <button (click)="deleteNote(noteId)">
+                deleteNote
+            </button>
+
+        </div>
     </div>
     <div class="note-image">
-        <div *ngFor= "let imageNote of noteContent.imageNotes">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#imageModal" id="{{imageNote.id}}" (click)="getElementId(imageNote.id)">
-                {{imageNote.id}}
+        <div class="current-image" id="current-image" (wheel)="onWheel($event)">
+            <div *ngFor= "let imageNote of noteContent.imageNotes">
+                <div type="button" class="btn image-tag" data-bs-toggle="modal" data-bs-target="#imageModal" id="{{imageNote.id}}" (click)="getElementId(imageNote.id)">
+                    <img class="img-fluid" src="{{imageNote.imageUrl}}" alt="">
+                    <h3>{{imageNote.text}}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="add-image">
+            <button type="button" class="btn image-tag" data-bs-toggle="modal" data-bs-target="#addImage">
+                Add Image
             </button>
         </div>
     </div>
     <div class="note-content">
         <div class="note-content__text">
-            <p>
+            <span id="noteContent" class="textarea" role="textbox" contenteditable>
                 {{ noteContent.text }}
-            </p>
-            <p>id: {{noteId}}</p>
+            </span>   
         </div>
     </div>
 </div>
+
+
+
+
+
 
 
 <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
