@@ -1,9 +1,24 @@
+.function{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    direction: ltr;
+}
+.function button{
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+}
 .wrap{
     width: 100%;
     height: 100vh;
     padding: 10px 30px;
     overflow-x: scroll;
-    background-color: #FFF7AA;
+    background-color: rgba(255, 247, 170, .5);
 
 }
 .wrap::-webkit-scrollbar {
@@ -30,12 +45,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    border-bottom: 1px solid #000;
+    direction: ltr;
 }
 .note-image{
     display: grid;
     grid-template-columns: 5fr 1fr;
     align-items: center;
+    background-color: rgba(245, 245, 245, .3);
     
 }
 .current-image{
@@ -44,7 +61,6 @@
     overflow: scroll;
     scroll-behavior: smooth;
 }
-
 .current-image::-webkit-scrollbar {
   display: none;
 }
@@ -53,9 +69,11 @@
   overflow: hidden;
   width: 200px;
   height: 200px;
-  background-color: whitesmoke;
+  background-color: rgb(245, 245, 245);
   margin: 5px;
   padding: 1px;
+  box-shadow: 3px 3px 5px #e5dd8c;
+  border-radius: 5px;
 }
 .image-tag h3{
   display: inline-block;
@@ -65,12 +83,50 @@
 }
 .header{
   display: grid;
-  grid-template-columns: 4fr 1fr 4fr;
-
+  grid-template-columns: 4fr 2fr 5fr;
+  direction: rtl;
 }
-input.note-title{
-  width: 100%;
+
+@media screen and (max-width: 700px) {
+  .header{
+    grid-template-columns: 1fr;
+  }
+}
+.color-pick{
+  direction: ltr;
 }
 #noteContent{
   font-size: 13pt;
+}
+.add-image{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+
+}
+textarea#image-caption{
+  font-size: 13pt;
+  margin-top: 10px;
+}
+.button-wrap{
+  display:grid;
+  grid-template-columns: 3fr 1fr;
+  width: 100%;
+}
+.button-wrap button{
+  width: 100%;
+  height: 40px;
+  font-size: 13pt;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+.button-wrap button:hover{
+  background-color: #e5dd8c;
+  transition: ease-in .2s;
+}
+.button-wrap .button-dismiss{
+  margin-right: 10px;
 }

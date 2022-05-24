@@ -1,24 +1,27 @@
 
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
 <div class="wrap">
     <div class="header">
-        <div class="note-title">
-            <span id="noteTitle" class="textarea" role="textbox" contenteditable [style.color]=noteContent.color>
-                {{ noteContent.title }}
-            </span>   
+        <div class="function">
+            <button class="btn btn-success" (click)="saveNote()">
+                Lưu
+            </button>
+            <button class="btn btn-danger" (click)="deleteNote(noteId)">
+                Xóa ghi chú
+            </button>
         </div>
         <div class="color-pick">
             <label for="ColorInput" class="form-label">Title Color</label><span>
                 <input type="color" class="form-control form-control-color" id="ColorInput" [value]="noteContent.color" title="Choose your color">
             </span>
         </div> 
-        <div class="function">
-            <button (click)="saveNote()">
-                save
-            </button>
-            <button (click)="deleteNote(noteId)">
-                deleteNote
-            </button>
-
+        <div class="note-title">
+            <span id="noteTitle" class="textarea" role="textbox" contenteditable [style.color]=noteContent.color>
+                {{ noteContent.title }}
+            </span>   
+            
         </div>
     </div>
     <div class="note-image">
@@ -32,7 +35,8 @@
         </div>
         <div class="add-image">
             <button type="button" class="btn image-tag" data-bs-toggle="modal" data-bs-target="#addImage">
-                Add Image
+                <img class="img-fluid" src="https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png" alt="">
+                <span>Thêm hình ảnh</span>
             </button>
         </div>
     </div>
@@ -62,9 +66,39 @@
             <button data-bs-dismiss="modal" >
                 Đóng
             </button>
-            <button (click)="deleteImage()">
+            <button (click)="deleteImage(clickedId)">
                 Xóa
             </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="addImage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered">
+      <div class="modal-content">
+       
+        <div class="modal-body">
+            <label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">URL</span>
+                    <input type="url" class="form-control" placeholder="Nhập đường dẫn hình ảnh" #imageURL aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <button class="btn btn-success" type="button" id="button-addon2" (click)="loadImage(imageURL.value)">Button</button>
+                </div>
+                <img id="temp-image" class="img-fluid" src="https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png" alt="">
+            </label>
+            <textarea id="image-caption" class="form-control" #imageCaption placeholder="nhập caption"></textarea>
+        </div>
+        <div class="modal-footer">
+            <div class="button-wrap">
+                <button data-bs-dismiss="modal" class="button-dismiss">
+                    Đóng
+                </button>
+                <button (click)="saveImage(imageCaption.value, imageURL.value)" class="button-save btn-success">
+                    Lưu
+                </button>
+            </div>
+            
         </div>
       </div>
     </div>

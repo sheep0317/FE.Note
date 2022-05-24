@@ -49,10 +49,9 @@ export class NoteContentComponent implements OnInit {
         }
       ]
   }
-  currentColor(){
-    var color =  (<HTMLInputElement>document.getElementById('ColorInput')).value;
-    console.log("color:",color);
-    return color;
+  noteId:any;
+  getElementId(id: any){
+    this.clickedId = id;
   }
   imageNoteContent(id : string){
     var imageNote = this.noteContent.imageNotes.find(imageNote => imageNote.id === id);
@@ -61,20 +60,18 @@ export class NoteContentComponent implements OnInit {
     }
     return {text: "", imageUrl: "", id: ""};
   }
-  getElementId(id: any){
-    this.clickedId = id;
+  onWheel(event: WheelEvent){
+    if (event.deltaY > 0) document.getElementById('current-image')!.scrollLeft += 100;
+    else document.getElementById('current-image')!.scrollLeft -= 100;
   }
   clickedId: any;
-  deleteImage(){
+  //Function
+  deleteImage(id: string){
     console.log("delete image");
   }
   deleteNote(noteId: any){
     console.log("delete note");
     this.router.navigate(['/note/blank']);
-  }
-  onWheel(event: WheelEvent){
-    if (event.deltaY > 0) document.getElementById('current-image')!.scrollLeft += 100;
-    else document.getElementById('current-image')!.scrollLeft -= 100;
   }
   saveNote(){
     var title = (<HTMLInputElement>document.getElementById('noteTitle')).value;
@@ -82,7 +79,15 @@ export class NoteContentComponent implements OnInit {
     console.log("title:",title);
     console.log("text:",text);
   }
-  noteId:any;
+  saveImage(caption: string, imageUrl: string){
+    console.log(imageUrl, caption);
+  }
+  loadImage(imageUrl: string){
+    if(imageUrl){
+      (<HTMLImageElement>document.getElementById('temp-image')).src = imageUrl;
+    }
+  }
+  
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.noteId = params['id'];
