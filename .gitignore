@@ -10,6 +10,8 @@
 /node_modules
 npm-debug.log
 yarn-error.log
+/BE.Note/node_modules
+/BE.Note/.gitignore
 
 # IDEs and editors
 .idea/
