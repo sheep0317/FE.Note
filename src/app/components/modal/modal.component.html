@@ -2,21 +2,10 @@
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
     <div class="offcanvas-header">
         <div class="user-grid">
-            <div class="image-of-user">
-                <img class="avatar" src='{{imageUrl}}'>
-            </div>
-            <div class="user-information">
-                <div class="nickname">
-                    Display Name
-                </div>
-                <div class="logout-btn">
-                    <button class="btn">
-                        Logout
-                    </button>
-                </div>
-            </div>
-            <div class="email">
-                tranvietmar15@gmail.com
+            <img class="img-fluid" src="https://www.pngall.com/wp-content/uploads/5/Sticky-Note.png" alt="">
+            <div class="text-canvas">
+                <p>my-note</p>
+                <input  type="text" class="username-text" placeholder="Your Name Is" [value]="username" #yourName (change)="saveName(yourName.value)">
             </div>
         </div>
     </div>
@@ -25,15 +14,16 @@
             <p class="my-note">My Note</p>
             <div *ngFor="let note of notes">
               <button 
-                class="note-btn deactive" 
+                class="note-btn" 
                 [style.color]=note.color
-                routerLink="/note/{{note.id}}">
+                routerLink="/note/{{note.id}}"
+                data-bs-dismiss="offcanvas">
                   {{note.text}}
               </button>
             </div>
         </div>
         <div class="add-note">
-            <button  routerLink="/note/add" routerLinkActive="active">
+            <button (click)="newNote()">
                 Thêm ghi chú mới
             </button>
         </div>

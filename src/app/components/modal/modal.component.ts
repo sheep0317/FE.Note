@@ -13,8 +13,18 @@ export class ModalComponent implements OnInit {
     {id:"2", color: '#00ff00', text: 'Note 2'},
     {id:"3", color: '#0000ff', text: 'Note 3'},
   ]
+  username: any;
+  saveName(name: string){
+    this.username = name;
+    localStorage.setItem('username', name);
+    console.log(this.username);
+  }
+  newNote(){
+    this.notes.push({id: (this.notes.length + 1).toString(), color: '#ffffff', text: ''});
+  }
   imageUrl: string = "https://www.w3schools.com/howto/img_snow.jpg";
   ngOnInit(): void {
+    this.username = localStorage.getItem('username');
   }
 
 }

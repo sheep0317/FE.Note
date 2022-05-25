@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
 @Component({
   selector: 'app-note-content',
   templateUrl: './note-content.component.html',
@@ -8,7 +7,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class NoteContentComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private router:Router) { }
+  constructor(
+    private route: ActivatedRoute, 
+    private router:Router,
+  ) { }
   noteContent = {
       id: "1",
       title: "Note 1",
@@ -74,7 +76,7 @@ export class NoteContentComponent implements OnInit {
     this.router.navigate(['/note/blank']);
   }
   saveNote(){
-    var title = (<HTMLInputElement>document.getElementById('noteTitle')).value;
+    var title = (<HTMLInputElement>document.getElementById('noteTitle')).innerHTML;
     var text = (<HTMLInputElement>document.getElementById('noteContent')).innerHTML;
     console.log("title:",title);
     console.log("text:",text);
@@ -86,6 +88,7 @@ export class NoteContentComponent implements OnInit {
     if(imageUrl){
       (<HTMLImageElement>document.getElementById('temp-image')).src = imageUrl;
     }
+
   }
   
   ngOnInit(): void {

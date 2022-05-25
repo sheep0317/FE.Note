@@ -27,10 +27,8 @@
 
 @media screen and (max-width: 500px) {
     .open-canvas{
-        display: none;
-    }
-    .nav-note{
-        display: block;
+        width: 30px;
+        font-size: larger;
     }
 }
     

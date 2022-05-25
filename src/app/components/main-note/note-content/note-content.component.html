@@ -63,12 +63,14 @@
           <app-image-note [imageNote]="imageNoteContent(clickedId)"></app-image-note>
         </div>
         <div class="modal-footer">
-            <button data-bs-dismiss="modal" >
-                Đóng
-            </button>
-            <button (click)="deleteImage(clickedId)">
-                Xóa
-            </button>
+            <div class="btn-wrap">
+                <button data-bs-dismiss="modal" class="image-close">
+                    Đóng
+                </button>
+                <button (click)="deleteImage(clickedId)" class="image-delete">
+                    Xóa
+                </button>
+            </div>
         </div>
       </div>
     </div>
