@@ -7,13 +7,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 const routes: Routes = [
   {path: 'note', component: MainNoteComponent, children: [
-    {path: '', component: BlankPageComponent},
-    {path: 'blank', component: BlankPageComponent},
-    {path: 'add', component: AddPageComponent},
-    {path: ':id', component: NoteContentComponent}
+    {path: '', component: BlankPageComponent, pathMatch: 'full'},
+    {path: 'blank', component: BlankPageComponent, pathMatch: 'full'},
+    {path: 'add', component: AddPageComponent, pathMatch: 'full'},
+    {path: ':id', component: NoteContentComponent, pathMatch: 'full'}
   ]},
   {path: '', redirectTo: '/note', pathMatch: 'full'},
-  {path: '**', component: PagenotfoundComponent}
+  {path: '**', component: PagenotfoundComponent, pathMatch: 'full'}
 ];
 
 @NgModule({

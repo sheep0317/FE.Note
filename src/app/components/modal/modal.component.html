@@ -16,14 +16,16 @@
               <button 
                 class="note-btn" 
                 [style.color]=note.color
-                routerLink="/note/{{note.id}}"
-                data-bs-dismiss="offcanvas">
-                  {{note.text}}
+                data-bs-dismiss="offcanvas"
+                (click)="redirectToNote(note._id)">
+                  {{note.note_title}}
               </button>
             </div>
         </div>
         <div class="add-note">
-            <button (click)="newNote()">
+            <button
+                data-bs-dismiss="offcanvas"
+                (click)="newNote()">
                 Thêm ghi chú mới
             </button>
         </div>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule,  } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { MainNoteComponent } from './components/main-note/main-note.component';
@@ -9,6 +9,8 @@ import { ImageNoteComponent } from './components/main-note/image-note/image-note
 import { BlankPageComponent } from './components/main-note/blank-page/blank-page.component';
 import { AddPageComponent } from './components/main-note/add-page/add-page.component';
 import { NoteContentComponent } from './components/main-note/note-content/note-content.component';
+import { HttpClientModule } from '@angular/common/http';
+import { HtmldecoderPipe } from './htmldecoder.pipe';
 
 @NgModule({
   declarations: [
@@ -19,11 +21,13 @@ import { NoteContentComponent } from './components/main-note/note-content/note-c
     ImageNoteComponent,
     BlankPageComponent,
     AddPageComponent,
-    NoteContentComponent
+    NoteContentComponent,
+    HtmldecoderPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -5,45 +5,54 @@
 <div class="wrap">
     <div class="header">
         <div class="function">
-            <button class="btn btn-success" (click)="saveNote()">
+            <button class="btn btn-success" (click)="saveNote(colorValue.value)">
                 Lưu
             </button>
-            <button class="btn btn-danger" (click)="deleteNote(noteId)">
+            <button class="btn btn-danger" (click)="deleteNote(noteId)" [disabled]="isTempNote()">
                 Xóa ghi chú
             </button>
+            
         </div>
         <div class="color-pick">
             <label for="ColorInput" class="form-label">Title Color</label><span>
-                <input type="color" class="form-control form-control-color" id="ColorInput" [value]="noteContent.color" title="Choose your color">
+                <input type="color" class="form-control form-control-color" id="ColorInput" #colorValue [value]="noteContent.color">
             </span>
         </div> 
         <div class="note-title">
-            <span id="noteTitle" class="textarea" role="textbox" contenteditable [style.color]=noteContent.color>
-                {{ noteContent.title }}
-            </span>   
-            
+            <input type="text" class="form-control" id="noteTitle" placeholder="Chủ đề" [value]="noteContent.note_title" [style.color]="noteContent.color">
         </div>
     </div>
-    <div class="note-image">
+    <div class="note-image" *ngIf = "!isTempNote()">
         <div class="current-image" id="current-image" (wheel)="onWheel($event)">
-            <div *ngFor= "let imageNote of noteContent.imageNotes">
-                <div type="button" class="btn image-tag" data-bs-toggle="modal" data-bs-target="#imageModal" id="{{imageNote.id}}" (click)="getElementId(imageNote.id)">
-                    <img class="img-fluid" src="{{imageNote.imageUrl}}" alt="">
-                    <h3>{{imageNote.text}}</h3>
+            <div *ngIf  = "isImagesNull()">
+                <div>
+                    Không có hình ảnh được ghi chú lại
+                </div>
+            </div>
+            <div *ngFor= "let imageNote of noteContent.image">
+                <div type="button" class="btn image-tag" data-bs-toggle="modal" data-bs-target="#imageModal" id="{{imageNote._id}}" (click)="getElementId(imageNote._id)">
+                    <div class="image-wrap">
+                        <img class="img-fluid" src="{{imageNote.image_url}}" alt="">
+                        
+                    </div>
+                    <h3>{{imageNote.image_title}}</h3>
+                    
                 </div>
             </div>
         </div>
         <div class="add-image">
             <button type="button" class="btn image-tag" data-bs-toggle="modal" data-bs-target="#addImage">
-                <img class="img-fluid" src="https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png" alt="">
-                <span>Thêm hình ảnh</span>
+                <div class="image-wrap">
+                    <img class="img-fluid" src="https://static.thenounproject.com/png/3322766-200.png" alt="">
+                </div>
+                <span class="addImage-text">Thêm hình ảnh</span>
             </button>
         </div>
     </div>
     <div class="note-content">
         <div class="note-content__text">
-            <span id="noteContent" class="textarea" role="textbox" contenteditable>
-                {{ noteContent.text }}
+            <span innerHTML="{{noteContent.note_content }}" id="noteContent" class="textarea" role="textbox"  spellcheck="false" contenteditable>
+                
             </span>   
         </div>
     </div>
@@ -79,24 +88,26 @@
   <div class="modal fade" id="addImage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered">
       <div class="modal-content">
-       
         <div class="modal-body">
             <label>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">URL</span>
                     <input type="url" class="form-control" placeholder="Nhập đường dẫn hình ảnh" #imageURL aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <button class="btn btn-success" type="button" id="button-addon2" (click)="loadImage(imageURL.value)">Button</button>
+                    <button class="btn btn-success" type="button" id="button-addon2" (click)="loadImage(imageURL.value)">preview</button>
                 </div>
                 <img id="temp-image" class="img-fluid" src="https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png" alt="">
             </label>
-            <textarea id="image-caption" class="form-control" #imageCaption placeholder="nhập caption"></textarea>
+            <div class="form-text">
+                <input #imageTitle class="form-control" placeholder="nhập tiêu đề cho ảnh">
+                <textarea id="image-caption" class="form-control" #imageCaption placeholder="nhập caption"></textarea>
+            </div>
         </div>
         <div class="modal-footer">
             <div class="button-wrap">
                 <button data-bs-dismiss="modal" class="button-dismiss">
                     Đóng
                 </button>
-                <button (click)="saveImage(imageCaption.value, imageURL.value)" class="button-save btn-success">
+                <button (click)="saveImage(imageTitle.value, imageCaption.value, imageURL.value)" class="button-save btn-success">
                     Lưu
                 </button>
             </div>

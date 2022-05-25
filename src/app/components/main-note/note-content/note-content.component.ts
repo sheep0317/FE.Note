@@ -1,66 +1,75 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NoteService } from 'src/app/services/note.service';
 @Component({
   selector: 'app-note-content',
   templateUrl: './note-content.component.html',
   styleUrls: ['./note-content.component.css']
 })
+@Injectable()
 export class NoteContentComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute, 
-    private router:Router,
+    private router: Router,
+    private noteService: NoteService
   ) { }
-  noteContent = {
-      id: "1",
-      title: "Note 1",
-      color: '#ff0000',
-      text: `Note 1askhdsdksahdkahdkash asdsjakdas asdkjsa`, 
-      imageNotes: [
-        {
-          id: "image1",
-          imageUrl: "https://www.w3schools.com/howto/img_snow.jpg",
-          text: `asdaskhdaskdsjahkdas saljdasldsjad image1  sadlksadlas`
-        },
-        {
-          id: "image2",
-          imageUrl: "https://www.w3schools.com/howto/img_snow.jpg",
-          text: `asdaskhdaskdsjahkdas image2 asdsajdsladjsa  sadlksadlas`
-        },
-        {
-          id: "image3",
-          imageUrl: "https://www.w3schools.com/howto/img_snow.jpg",
-          text: `asdaskhdaskdsjahkdas saljdasimage3sajdsladjsa  sadlksadlas`
-        },
-        {
-          id: "image4",
-          imageUrl: "https://www.w3schools.com/howto/img_snow.jpg",
-          text: `asdaskhdaskdsjahkdas saljdasimage4sajdsladjsa  sadlksadlas`
-        },
-        {
-          id: "image5",
-          imageUrl: "https://www.w3schools.com/howto/img_snow.jpg",
-          text: `asdaskhdaskdsjahkdas saljdasimage5sajdsladjsa  sadlksadlas`
-
-        },
-        {
-          id: "image6",
-          imageUrl: "https://www.w3schools.com/howto/img_snow.jpg",
-          text: `asdaskhdaskdsjahkdas saljdasimage6sajdsladjsa  sadlksadlas`
-
-        }
-      ]
+  noteId:string = "";
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.noteId = params['id'];
+    });
+    console.log(this.noteId);
+    if(this.noteId != "tempNote"){
+      this.noteService.getNoteContent(this.noteId).subscribe(res => {
+        this.noteContent = res.data;
+        console.log(this.noteContent);
+        
+      }, err => {
+        
+      })
+    }
+    
   }
-  noteId:any;
+  logColor(color: string){
+    console.log(color);
+  }
+  isTempNote(){
+    if (this.noteId == "tempNote"){
+      return true;
+    }
+    return false;
+  }
+  isImagesNull(){
+    if(this.noteContent.image.length == 0){
+      return true;
+    }
+    return false;
+  }
+  noteContent = {
+    _id: "",
+    note_title: "",
+    note_content: "",
+    color: "",
+    image: [
+      {
+        _id: "",
+        image_title: "",
+        image_url: "",
+        image_caption: ""
+      }
+    ]
+  }
+
   getElementId(id: any){
     this.clickedId = id;
   }
   imageNoteContent(id : string){
-    var imageNote = this.noteContent.imageNotes.find(imageNote => imageNote.id === id);
+    var imageNote = this.noteContent.image.find(image => image._id === id);
     if (imageNote){
       return imageNote;
     }
-    return {text: "", imageUrl: "", id: ""};
+    return {caption: "", image_url: "", _id: ""};
   }
   onWheel(event: WheelEvent){
     if (event.deltaY > 0) document.getElementById('current-image')!.scrollLeft += 100;
@@ -69,32 +78,67 @@ export class NoteContentComponent implements OnInit {
   clickedId: any;
   //Function
   deleteImage(id: string){
-    console.log("delete image");
+    var data = {
+      id: this.noteContent._id,
+      imageNoteId: id
+    }
+    this.noteService.deleteImageNote(data).subscribe(res => {
+      window.location.reload();
+    })
   }
   deleteNote(noteId: any){
-    console.log("delete note");
-    this.router.navigate(['/note/blank']);
+    this.noteService.deleteNote(noteId).subscribe(res => {
+      this.router.navigate(['/note/blank']).then(() => {
+        window.location.reload();
+      });
+    })
+
   }
-  saveNote(){
-    var title = (<HTMLInputElement>document.getElementById('noteTitle')).innerHTML;
+  saveNote(color:string){
+    var title = (<HTMLInputElement>document.getElementById('noteTitle')).value;
     var text = (<HTMLInputElement>document.getElementById('noteContent')).innerHTML;
-    console.log("title:",title);
-    console.log("text:",text);
+  
+    if (this.isTempNote()){
+      var note = {
+        note_title: title,
+        note_content: text,
+        color: color
+      }
+      this.noteService.createNewNote(note).subscribe(res => {
+        this.router.navigate(['/note/'+ res.data]).then(() => {
+          window.location.reload();
+        });
+      })
+    }else{
+      this.noteContent.note_title = title;
+      this.noteContent.note_content = text;
+      this.noteContent.color = color;
+      this.noteService.updateNote(this.noteContent).subscribe(res => {
+        window.location.reload();
+      })
+    }
+    
+    
   }
-  saveImage(caption: string, imageUrl: string){
-    console.log(imageUrl, caption);
+  saveImage(title:string, caption: string, imageUrl: string){
+    var image = {
+      image_title: title,
+      image_url: imageUrl,
+      image_caption: caption
+    }
+    var data = {
+      id: this.noteContent._id,
+      image: image
+    }
+    this.noteService.createNewImageNote(data).subscribe(res => {
+      console.log(res);
+      window.location.reload();
+    })
+    
   }
   loadImage(imageUrl: string){
     if(imageUrl){
       (<HTMLImageElement>document.getElementById('temp-image')).src = imageUrl;
     }
-
   }
-  
-  ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.noteId = params['id'];
-    });
-  }
-
 }

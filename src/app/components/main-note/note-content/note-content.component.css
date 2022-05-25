@@ -1,4 +1,6 @@
-
+#noteContent{
+  white-space: pre-wrap;
+}
 .function{
     display: grid;
     grid-template-columns: 3fr 1fr;
@@ -13,6 +15,12 @@
     border: none;
     border-radius: 0;
     cursor: pointer;
+}
+.function .btn-success{
+    border-radius: 5px 0 0 5px;
+}
+.function .btn-danger{
+    border-radius: 0 5px 5px 0;
 }
 .wrap{
     width: 100%;
@@ -35,12 +43,10 @@
     padding: 5px;
 }
 .textarea[contenteditable]:empty::before {
-  content: "Placeholder still possible";
+  content: "Nội dung ghi chú...";
   color: gray;
 }
 .note-title{
-    font-size: 18pt;
-    font-weight: bold;
     margin: 10px 10px 10px 0px;
     border: none;
     display: flex;
@@ -49,12 +55,18 @@
     border-bottom: 1px solid #000;
     direction: ltr;
 }
+.note-title input{
+    border: none;
+    background-color: transparent;
+    cursor: text;
+    font-size: 16pt;
+    font-weight: bold;
+}
 .note-image{
     display: grid;
     grid-template-columns: 5fr 1fr;
     align-items: center;
     background-color: rgba(245, 245, 245, .3);
-    
 }
 .current-image{
     display: flex;
@@ -68,19 +80,26 @@
 .image-tag{
   display: block;
   overflow: hidden;
-  width: 20vw;
-  height: 20vw;
+  width: 17vw;
+  height: 17vw;
   background-color: rgb(245, 245, 245);
   margin: 5px;
+  margin-right: 10px;
   padding: 1px;
   box-shadow: 3px 3px 5px #e5dd8c;
-  border-radius: 5px;
+  border-radius: 10px;
+}
+.image-wrap{
+  height: 17vw;
+  max-height: 14vw;
+
 }
 .image-tag h3{
   display: inline-block;
   overflow: hidden;
-  font-size: 12pt;
-  height: 12pt;
+  font-size: 1.5vw;
+  height: 2vw;
+  margin: 0.5vw;
 }
 .header{
   display: grid;
@@ -151,4 +170,11 @@ textarea#image-caption{
 .btn-wrap .image-delete{
   margin: 0;
   background-color: rgba(255, 0, 0, .5);
+}
+.form-text{
+  margin-top: 5px;
+}
+span.addImage-text{
+  font-size: 1.5vw;
+  padding: 0.5vw;
 }
