@@ -23,11 +23,11 @@ export class NoteContentComponent implements OnInit {
     if(this.noteId != "tempNote"){
       this.noteService.getNoteContent(this.noteId).subscribe(res => {
         this.noteContent = res.data;
-        console.log(this.noteContent);
-        
       }, err => {
-        
-      })
+        this.router.navigate(['/note/blank']).then(() => {
+          window.location.reload();
+        })
+      });
     }
     
   }

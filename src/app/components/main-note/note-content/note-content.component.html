@@ -33,10 +33,8 @@
                 <div type="button" class="btn image-tag" data-bs-toggle="modal" data-bs-target="#imageModal" id="{{imageNote._id}}" (click)="getElementId(imageNote._id)">
                     <div class="image-wrap">
                         <img class="img-fluid" src="{{imageNote.image_url}}" alt="">
-                        
                     </div>
                     <p>{{imageNote.image_title}}</p>
-                    
                 </div>
             </div>
         </div>
@@ -59,11 +57,9 @@
 </div>
 
 
+<!-----------------------Modal popup--------------------------->
 
-
-
-
-
+<!--Image Modal-->
 <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered">
       <div class="modal-content">
@@ -83,36 +79,40 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="modal fade" id="addImage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+</div>
+<!--Add New Image-->
+<div class="modal fade" id="addImage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-body">
-            <label>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">URL</span>
-                    <input type="url" class="form-control" placeholder="Nhập đường dẫn hình ảnh" #imageURL aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <button class="btn btn-success" type="button" id="button-addon2" (click)="loadImage(imageURL.value)">preview</button>
+        <div class="modal-content">
+            <div class="modal-body">
+                <label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">URL</span>
+                        <input type="url" class="form-control" placeholder="Nhập đường dẫn hình ảnh" #imageURL aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <button class="btn btn-success" type="button" id="button-addon2" (click)="loadImage(imageURL.value)">preview</button>
+                    </div>
+                    <img id="temp-image" class="img-fluid" src="https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png" alt="">
+                </label>
+                <div class="form-text">
+                    <input #imageTitle class="form-control" placeholder="nhập tiêu đề cho ảnh">
+                    <textarea id="image-caption" class="form-control" #imageCaption placeholder="nhập caption"></textarea>
                 </div>
-                <img id="temp-image" class="img-fluid" src="https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png" alt="">
-            </label>
-            <div class="form-text">
-                <input #imageTitle class="form-control" placeholder="nhập tiêu đề cho ảnh">
-                <textarea id="image-caption" class="form-control" #imageCaption placeholder="nhập caption"></textarea>
+            </div>
+            <div class="modal-footer">
+                <div class="button-wrap">
+                    <button data-bs-dismiss="modal" class="button-dismiss">
+                        Đóng
+                    </button>
+                    <button (click)="saveImage(imageTitle.value, imageCaption.value, imageURL.value)" class="button-save btn-success">
+                        Lưu
+                    </button>
+                </div>
+                
             </div>
         </div>
-        <div class="modal-footer">
-            <div class="button-wrap">
-                <button data-bs-dismiss="modal" class="button-dismiss">
-                    Đóng
-                </button>
-                <button (click)="saveImage(imageTitle.value, imageCaption.value, imageURL.value)" class="button-save btn-success">
-                    Lưu
-                </button>
-            </div>
-            
-        </div>
-      </div>
     </div>
-  </div>
+</div>
+
+<!--Delete Warning Modal-->
+
+  
