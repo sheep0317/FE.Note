@@ -1,3 +1,12 @@
+.wrap-note-title{
+    margin : 10px;
+    padding: 5px;
+    border-radius: 10px;
+    border: dashed 1px #ccc;
+}
+.note-title{
+    padding: 1px;
+}
 .text-canvas{
     display: flex;
     flex-direction: column;
@@ -53,7 +62,7 @@
     opacity: 75%;
 }
 .offcanvas-body{
-    padding: 5px 0;
+    padding: 5px 5px;
 }
 .note-btn{
     width: 100%;
@@ -66,15 +75,9 @@
 }
 .offcanvas-header {
   padding: 20px;
-  background: #261E47;
+  background: #4F3A7A;
   color: #fff;
   font-size: 1.2em;
-}
-.logout-btn .btn{
-    background-color: #FFE32D;
-    color: #261E47;
-    border-radius: 5%;
-    margin: 10px;
 }
 .user-grid{
     display: grid;

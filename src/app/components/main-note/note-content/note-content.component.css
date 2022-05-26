@@ -1,9 +1,17 @@
+.function .btn-success{
+  background-color: #68F75E;
+  color: #000;
+}
+.function .btn-danger{
+  background-color: #FB5053;
+  color: #000;
+}
 #noteContent{
   white-space: pre-wrap;
 }
 .function{
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 2fr 1fr;
     width: 100%;
     height: 100%;
     padding: 15px;
@@ -15,19 +23,21 @@
     border: none;
     border-radius: 0;
     cursor: pointer;
+    font-weight: 400;
 }
 .function .btn-success{
     border-radius: 5px 0 0 5px;
 }
 .function .btn-danger{
     border-radius: 0 5px 5px 0;
+    color: whitesmoke;
 }
 .wrap{
     width: 100%;
     height: 100vh;
     padding: 10px 30px;
     overflow-x: scroll;
-    background-color: rgba(255, 247, 170, .5);
+    background-color: rgba(255, 253, 173, 0.8);
 
 }
 .wrap::-webkit-scrollbar {
@@ -67,6 +77,18 @@
     grid-template-columns: 5fr 1fr;
     align-items: center;
     background-color: rgba(245, 245, 245, .3);
+    margin: 20px 10px 10px 10px;
+    border-radius: 5px;
+    max-height: 300px;
+}
+.note-image .text{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 14pt;
+    font-weight: bold;
+    color: #0E2756;
 }
 .current-image{
     display: flex;
@@ -80,9 +102,9 @@
 .image-tag{
   display: block;
   overflow: hidden;
-  width: 17vw;
-  height: 17vw;
-  background-color: rgb(245, 245, 245);
+  width: 250px;
+  height: 250px;
+  background-color: rgba(245, 245, 245, .3);
   margin: 5px;
   margin-right: 10px;
   padding: 1px;
@@ -90,16 +112,16 @@
   border-radius: 10px;
 }
 .image-wrap{
-  height: 17vw;
-  max-height: 14vw;
-
+  min-height: 200px;
 }
-.image-tag h3{
+.image-tag p{
   display: inline-block;
   overflow: hidden;
-  font-size: 1.5vw;
-  height: 2vw;
+  font-size: 12pt;
+  height: 15pt;
+  font-weight: bold;
   margin: 0.5vw;
+
 }
 .header{
   display: grid;
@@ -113,6 +135,10 @@
   }
 }
 .color-pick{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   direction: ltr;
 }
 #noteContent{
@@ -122,8 +148,8 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
-  padding: 10px;
+  border: solid 2px #000;
+  border-radius: 10px;
 
 }
 textarea#image-caption{
@@ -169,12 +195,26 @@ textarea#image-caption{
 }
 .btn-wrap .image-delete{
   margin: 0;
-  background-color: rgba(255, 0, 0, .5);
+  background-color: #F99A9C;
+  color: #343434;
 }
 .form-text{
   margin-top: 5px;
 }
 span.addImage-text{
-  font-size: 1.5vw;
+  font-size: 12pt;
+  font-weight: bold;
   padding: 0.5vw;
+}
+.add-image .image-tag{
+  min-height: 100px;
+  min-width: 100px;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(255, 255, 255, .3);
+  cursor: pointer;
+  margin: 0;
+  padding: 10px;
+  box-shadow: none;
+  border-radius: 10px;
 }

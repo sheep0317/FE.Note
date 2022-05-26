@@ -25,7 +25,7 @@
     <div class="note-image" *ngIf = "!isTempNote()">
         <div class="current-image" id="current-image" (wheel)="onWheel($event)">
             <div *ngIf  = "isImagesNull()">
-                <div>
+                <div class="text">
                     Không có hình ảnh được ghi chú lại
                 </div>
             </div>
@@ -35,7 +35,7 @@
                         <img class="img-fluid" src="{{imageNote.image_url}}" alt="">
                         
                     </div>
-                    <h3>{{imageNote.image_title}}</h3>
+                    <p>{{imageNote.image_title}}</p>
                     
                 </div>
             </div>

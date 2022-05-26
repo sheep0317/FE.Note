@@ -12,15 +12,18 @@
     <div class="offcanvas-body">
         <div class="present-note">
             <p class="my-note">My Note</p>
-            <div *ngFor="let note of notes">
-              <button 
-                class="note-btn" 
-                [style.color]=note.color
-                data-bs-dismiss="offcanvas"
-                (click)="redirectToNote(note._id)">
-                  {{note.note_title}}
-              </button>
+            <div class="wrap-note-title">
+                <div *ngFor="let note of notes" class="note-title">
+                    <button 
+                      class="note-btn" 
+                      [style.color]=note.color
+                      data-bs-dismiss="offcanvas"
+                      (click)="redirectToNote(note._id)">
+                        {{note.note_title}}
+                    </button>
+                  </div>
             </div>
+            
         </div>
         <div class="add-note">
             <button
